@@ -1,0 +1,14 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/com/jasons/cptcoffeeusers/api/ApiUtil.java
+src/main/java/com/jasons/cptcoffeeusers/api/CompanyApi.java
+src/main/java/com/jasons/cptcoffeeusers/api/ProductsApi.java
+src/main/java/com/jasons/cptcoffeeusers/model/Company.java
+src/main/java/com/jasons/cptcoffeeusers/model/ErrorResponse.java
+src/main/java/com/jasons/cptcoffeeusers/model/ErrorResponseWrapper.java
+src/main/java/com/jasons/cptcoffeeusers/model/GetAllCompaniesResponseWrapper.java
+src/main/java/com/jasons/cptcoffeeusers/model/GetCompanyNameResponseWrapper.java
+src/main/java/com/jasons/cptcoffeeusers/model/GetCpyProductResponseWrapper.java
+src/main/java/com/jasons/cptcoffeeusers/model/JsonNullableObject.java
+src/main/java/com/jasons/cptcoffeeusers/model/Product.java
