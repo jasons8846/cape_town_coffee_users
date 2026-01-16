@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-09T15:53:38.779259100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T09:28:56.480121100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
 @Validated
 @Tag(name = "Company", description = "the Company API")
 public interface CompanyApi {
@@ -81,17 +81,17 @@ public interface CompanyApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" }, { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" } ], \"error\" : { \"present\" : true } }";
+                    String exampleString = "{ \"data\" : [ { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" }, { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" } ], \"error\" : \"{}\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
@@ -142,17 +142,17 @@ public interface CompanyApi {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" }, \"error\" : { \"present\" : true } }";
+                    String exampleString = "{ \"data\" : { \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"name\" : \"Starbucks\" }, \"error\" : \"{}\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

@@ -33,7 +33,7 @@ import java.util.Map;
 import java.util.Optional;
 import jakarta.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-09T15:53:38.779259100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T09:28:56.480121100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
 @Validated
 @Tag(name = "Products", description = "the Products API")
 public interface ProductsApi {
@@ -47,7 +47,9 @@ public interface ProductsApi {
      * Retrieve products for a specified company
      *
      * @param companyCode the unique companyCode (required)
+     * @param pageSize pagination pageSize parameter (required)
      * @param xCorrelationId Identifier to track API requests (required)
+     * @param cursor pagination cursor parameter (optional)
      * @return Successful response (status code 200)
      *         or Bad request (status code 400)
      *         or Server error (status code 500)
@@ -77,22 +79,24 @@ public interface ProductsApi {
     
     default ResponseEntity<GetCpyProductResponseWrapper> retrieveCpyProducts(
         @Parameter(name = "companyCode", description = "the unique companyCode", required = true, in = ParameterIn.PATH) @PathVariable("companyCode") String companyCode,
-        @NotNull @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$") @Parameter(name = "X-Correlation-Id", description = "Identifier to track API requests", required = true, in = ParameterIn.HEADER) @RequestHeader(value = "X-Correlation-Id", required = true) String xCorrelationId
+        @NotNull @Parameter(name = "pageSize", description = "pagination pageSize parameter", required = true, in = ParameterIn.QUERY) @Valid @RequestParam(value = "pageSize", required = true) Integer pageSize,
+        @NotNull @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$") @Parameter(name = "X-Correlation-Id", description = "Identifier to track API requests", required = true, in = ParameterIn.HEADER) @RequestHeader(value = "X-Correlation-Id", required = true) String xCorrelationId,
+        @Parameter(name = "cursor", description = "pagination cursor parameter", in = ParameterIn.QUERY) @Valid @RequestParam(value = "cursor", required = false) String cursor
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType: MediaType.parseMediaTypes(request.getHeader("Accept"))) {
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : [ { \"companyCode\" : \"12weHIaq3ATOP1nM3Cx\", \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"price\" : 34.99, \"name\" : \"Flat white\", \"variant\" : \"Small\", \"currency\" : \"ZAR\" }, { \"companyCode\" : \"12weHIaq3ATOP1nM3Cx\", \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"price\" : 34.99, \"name\" : \"Flat white\", \"variant\" : \"Small\", \"currency\" : \"ZAR\" } ], \"error\" : { \"present\" : true } }";
+                    String exampleString = "{ \"data\" : { \"nextCursor\" : \"x72ysS3cS9uUi5reeXgs7\", \"products\" : [ { \"companyCode\" : \"12weHIaq3ATOP1nM3Cx\", \"sequence\" : 1, \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"price\" : 34.99, \"name\" : \"Flat white\", \"variant\" : { \"sequence\" : 1, \"description\" : \"Small\" }, \"currency\" : \"ZAR\" }, { \"companyCode\" : \"12weHIaq3ATOP1nM3Cx\", \"sequence\" : 1, \"code\" : \"12weHIaq3ATOP1nM3Cx\", \"price\" : 34.99, \"name\" : \"Flat white\", \"variant\" : { \"sequence\" : 1, \"description\" : \"Small\" }, \"currency\" : \"ZAR\" } ] }, \"error\" : \"{}\" }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }
                 if (mediaType.isCompatibleWith(MediaType.valueOf("application/json"))) {
-                    String exampleString = "{ \"data\" : { \"present\" : true }, \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
+                    String exampleString = "{ \"data\" : \"{}\", \"error\" : { \"details\" : \"No company data is available for the request\", \"message\" : \"No data available\" } }";
                     ApiUtil.setExampleResponse(request, "application/json", exampleString);
                     break;
                 }

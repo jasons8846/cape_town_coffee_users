@@ -30,16 +30,16 @@ public class ProductServiceImpl implements ProductService {
             LoggerFactory.getLogger(ProductServiceImpl.class);
 
     @Override
-    public List<Product> getCompanyProducts(String companyCode) {
+    public List<ProductEntity> getCompanyProducts(String companyCode, Integer cursor, Integer pageSize) {
 
         if(ValidateCompanyCode(companyCode) == false){
             log.warn("Get company products: Company code " + companyCode + " is not valid");
             throw new NotFoundException("Company code " + companyCode + " is not valid");
         }
 
-        List<ProductEntity> productEntities = productRepository.getProductsByCompanyCode(companyCode)
+
+        List<ProductEntity> productEntities = productRepository.getProductsByCompanyCode(companyCode, cursor, pageSize+1)
                 .stream()
-                .filter(e-> e.getActive() == true)
                 .collect(Collectors.toList());
 
         if(productEntities == null){
@@ -47,21 +47,7 @@ public class ProductServiceImpl implements ProductService {
             throw new NotFoundException("No products available for company code " + companyCode);
         }
 
-        List<Product> products = new ArrayList<>();
-
-        productEntities.forEach(productEntity -> {
-            Product product = new Product();
-            product.setName(productEntity.getName());
-            product.setCompanyCode(productEntity.getCompanyCode());
-            product.setPrice(productEntity.getPrice());
-            product.setCurrency(productEntity.getCurrency());
-            product.setVariant(productEntity.getVariant());
-            product.setCode(productEntity.getCode());
-
-            products.add(product);
-        });
-
-        return products;
+        return productEntities;
     }
 
     private boolean ValidateCompanyCode(String companyCode){

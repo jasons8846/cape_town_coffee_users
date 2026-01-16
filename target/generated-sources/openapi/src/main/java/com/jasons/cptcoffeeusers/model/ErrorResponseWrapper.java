@@ -5,7 +5,9 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.jasons.cptcoffeeusers.model.ErrorResponse;
-import com.jasons.cptcoffeeusers.model.JsonNullableObject;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -20,15 +22,15 @@ import jakarta.annotation.Generated;
  * ErrorResponseWrapper
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-09T15:53:38.779259100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T09:28:56.480121100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
 public class ErrorResponseWrapper {
 
-  private JsonNullableObject data;
+  private JsonNullable<Object> data = JsonNullable.<Object>undefined();
 
   private ErrorResponse error;
 
-  public ErrorResponseWrapper data(JsonNullableObject data) {
-    this.data = data;
+  public ErrorResponseWrapper data(Object data) {
+    this.data = JsonNullable.of(data);
     return this;
   }
 
@@ -36,14 +38,14 @@ public class ErrorResponseWrapper {
    * Get data
    * @return data
   */
-  @Valid 
+  
   @Schema(name = "data", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("data")
-  public JsonNullableObject getData() {
+  public JsonNullable<Object> getData() {
     return data;
   }
 
-  public void setData(JsonNullableObject data) {
+  public void setData(JsonNullable<Object> data) {
     this.data = data;
   }
 
@@ -76,13 +78,24 @@ public class ErrorResponseWrapper {
       return false;
     }
     ErrorResponseWrapper errorResponseWrapper = (ErrorResponseWrapper) o;
-    return Objects.equals(this.data, errorResponseWrapper.data) &&
+    return equalsNullable(this.data, errorResponseWrapper.data) &&
         Objects.equals(this.error, errorResponseWrapper.error);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, error);
+    return Objects.hash(hashCodeNullable(data), error);
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

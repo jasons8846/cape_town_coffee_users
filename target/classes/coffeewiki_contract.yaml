@@ -1,16 +1,57 @@
 openapi: 3.0.1
 info:
-  title: Cape Town Coffee
+  title: Cape Town Coffee Wiki Service
   description: This service provides information on coffee shops and there prices
-  version: '1.0'
+  version: 1.0.0
+
 servers:
-  - url: 'http://localhost:8080'
+  - url: http://localhost:8080
+
 tags:
   - name: Company
-    description: the Company API
   - name: Products
-    description: the Products API
+
+
 paths:
+  /v1/company/{name}:
+    get:
+      tags:
+        - Company
+      summary: Retrieve the coffee company details
+      description: Retrieve coffee company details
+      operationId: getCompanyName
+      parameters:
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
+          description: the name of the company
+        - in: header
+          name: X-Correlation-Id
+          schema:
+            $ref: '#/components/schemas/UUIDv7'
+          required: true
+          description: Identifier to track API requests
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCompanyNameResponseWrapper"
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseWrapper"
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponseWrapper"
   /v1/company:
     get:
       tags:
@@ -19,33 +60,31 @@ paths:
       description: Retrieve all available coffee companies with their details
       operationId: getAllCompanies
       parameters:
-        - name: X-Correlation-Id
-          in: header
-          description: Identifier to track API requests
-          required: true
+        - in: header
+          name: X-Correlation-Id
           schema:
-            type: string
-            pattern: >-
-              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
+            $ref: '#/components/schemas/UUIDv7'
+          required: true
+          description: Identifier to track API requests
       responses:
         '200':
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetAllCompaniesResponseWrapper'
+                $ref: "#/components/schemas/GetAllCompaniesResponseWrapper"
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
+                $ref: "#/components/schemas/ErrorResponseWrapper"
         '500':
           description: Server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
+                $ref: "#/components/schemas/ErrorResponseWrapper"
 
 
   /v1/product/{companyCode}:
@@ -56,109 +95,125 @@ paths:
       description: Retrieve products for a specified company
       operationId: retrieveCpyProducts
       parameters:
-        - name: companyCode
-          in: path
+        - in: path
+          name: companyCode
+          schema:
+            type: string
+          required: true
           description: the unique companyCode
-          required: true
+        - in: query
+          name: cursor
           schema:
             type: string
-        - name: X-Correlation-Id
-          in: header
+          required: false
+          description: pagination cursor parameter
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+          required: true
+          description: pagination pageSize parameter
+        - in: header
+          name: X-Correlation-Id
+          schema:
+            $ref: '#/components/schemas/UUIDv7'
+          required: true
           description: Identifier to track API requests
-          required: true
-          schema:
-            type: string
-            pattern: >-
-              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetCpyProductResponseWrapper'
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
-        '500':
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
 
-  /v1/company/{name}:
-    get:
-      tags:
-        - Company
-      summary: Retrieve the coffee company details
-      description: Retrieve coffee company details
-      operationId: getCompanyName
-      parameters:
-        - name: name
-          in: path
-          description: the name of the company
-          required: true
-          schema:
-            type: string
-        - name: X-Correlation-Id
-          in: header
-          description: Identifier to track API requests
-          required: true
-          schema:
-            type: string
-            pattern: >-
-              ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$
       responses:
         '200':
           description: Successful response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetCompanyNameResponseWrapper'
+                $ref: "#/components/schemas/GetCpyProductResponseWrapper"
         '400':
           description: Bad request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
+                $ref: "#/components/schemas/ErrorResponseWrapper"
         '500':
           description: Server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponseWrapper'
+                $ref: "#/components/schemas/ErrorResponseWrapper"
 
 components:
+
   schemas:
-    JsonNullableObject:
-      type: object
-      properties:
-        present:
-          type: boolean
-    ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          description: field describing the error
-          example: No data available
-        details:
-          type: string
-          description: details giving more information on the error
-          example: No company data is available for the request
-    ErrorResponseWrapper:
+    UUIDv7:
+      type: string
+      pattern: '^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[7][0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$'
+
+
+    GetCompanyNameResponseWrapper:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/JsonNullableObject'
+          $ref: "#/components/schemas/Company"
         error:
-          $ref: '#/components/schemas/ErrorResponse'
+          type: object
+          nullable: true
+          example: null
+
+    GetAllCompaniesResponseWrapper:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/Company"
+        error:
+          type: object
+          nullable: true
+          example: null
+
+
+
+    GetCpyProductResponseWrapper:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/GetCpyProductResponse"
+        error:
+          type: object
+          nullable: true
+          example: null
+
+    GetCpyProductResponse:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        nextCursor:
+          type: string
+          description: the next cursor to use
+          example: x72ysS3cS9uUi5reeXgs7
+
+    Company:
+      type: object
+      properties:
+        code:
+          type: string
+          description: unique code asscociated to each company on creation
+          example: 12weHIaq3ATOP1nM3Cx
+        name:
+          type: string
+          description: the name of the company
+          example: Starbucks
+
     Product:
       type: object
+      required:
+        - companyCode
+        - name
+        - variant
+        - price
+        - currency
       properties:
         companyCode:
           type: string
@@ -173,56 +228,51 @@ components:
           description: the name of the product
           example: Flat white
         variant:
-          type: string
-          description: the variant of the product describes the size
-          example: Small
+          $ref: "#/components/schemas/ProductVariant"
         price:
           type: number
+          format: decimal
           description: The price amount in the specified currency.
           example: 34.99
         currency:
           type: string
-          description: 'The currency code (e.g., ZAR, USD).'
-          example: ZAR
-      required:
-        - companyCode
-        - currency
-        - name
-        - price
-        - variant
-    Company:
+          description: The currency code (e.g., ZAR, USD).
+          example: "ZAR"
+        sequence:
+          type: integer
+          description: the product sequence as a guide as to where in a list it should be displayed
+          example: 1
+
+    ProductVariant:
       type: object
       properties:
-        code:
+        description:
           type: string
-          description: unique code asscociated to each company on creation
-          example: 12weHIaq3ATOP1nM3Cx
-        name:
+          description: describes the variant of the product
+          example: "Small"
+        sequence:
+          type: integer
+          description: the varaint sequence as a guide as to where in a list it should be displayed in relation to other variants of the same product
+          example: 1
+
+    ErrorResponseWrapper:
+      type: object
+      properties:
+        data:
+          type: object
+          nullable: true
+          example: null
+        error:
+          $ref: "#/components/schemas/ErrorResponse"
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
           type: string
-          description: the name of the company
-          example: Starbucks
-    GetCpyProductResponseWrapper:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        error:
-          $ref: '#/components/schemas/JsonNullableObject'
-    GetAllCompaniesResponseWrapper:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Company'
-        error:
-          $ref: '#/components/schemas/JsonNullableObject'
-    GetCompanyNameResponseWrapper:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Company'
-        error:
-          $ref: '#/components/schemas/JsonNullableObject'
+          description: field describing the error
+          example: No data available
+        details:
+          type: string
+          description: details giving more information on the error
+          example: No company data is available for the request

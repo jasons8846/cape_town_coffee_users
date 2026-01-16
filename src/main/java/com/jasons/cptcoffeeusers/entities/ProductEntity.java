@@ -1,6 +1,9 @@
 package com.jasons.cptcoffeeusers.entities;
 
+import com.jasons.cptcoffeeusers.model.ProductVariant;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 
@@ -13,10 +16,32 @@ public class ProductEntity {
     private String code;
     private String companyCode;
     private String name;
-    private String variant;
+
+    public ProductVariant getProductVariant() {
+        return productVariant;
+    }
+
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
+    }
+
+
+    @Column(name="variant")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private ProductVariant productVariant;
     private BigDecimal price;
     private String currency;
     private Boolean active;
+
+    private Integer sequence;
+
+    public Integer getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(Integer sequence) {
+        this.sequence = sequence;
+    }
 
     public Boolean getActive() {
         return active;
@@ -30,13 +55,13 @@ public class ProductEntity {
     }
 
 
-    public ProductEntity(String code, String companyCode, String name, String variant, BigDecimal price, String currency) {
+    public ProductEntity(String code, String companyCode, String name, BigDecimal price, String currency, Integer sequence) {
         this.code = code;
         this.companyCode = companyCode;
         this.name = name;
-        this.variant = variant;
         this.price = price;
         this.currency = currency;
+        this.sequence = sequence;
     }
 
     public String getCode() {
@@ -71,13 +96,13 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public String getVariant() {
-        return variant;
-    }
-
-    public void setVariant(String variant) {
-        this.variant = variant;
-    }
+//    public ProductVariantEntity getVariant() {
+//        return variant;
+//    }
+//
+//    public void setVariant(ProductVariantEntity variant) {
+//        this.variant = variant;
+//    }
 
     public BigDecimal getPrice() {
         return price;

@@ -5,7 +5,9 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.jasons.cptcoffeeusers.model.Company;
-import com.jasons.cptcoffeeusers.model.JsonNullableObject;
+import java.util.Arrays;
+import org.openapitools.jackson.nullable.JsonNullable;
+import java.util.NoSuchElementException;
 import org.openapitools.jackson.nullable.JsonNullable;
 import java.time.OffsetDateTime;
 import jakarta.validation.Valid;
@@ -20,12 +22,12 @@ import jakarta.annotation.Generated;
  * GetCompanyNameResponseWrapper
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-09T15:53:38.779259100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-16T09:28:56.480121100+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
 public class GetCompanyNameResponseWrapper {
 
   private Company data;
 
-  private JsonNullableObject error;
+  private JsonNullable<Object> error = JsonNullable.<Object>undefined();
 
   public GetCompanyNameResponseWrapper data(Company data) {
     this.data = data;
@@ -47,8 +49,8 @@ public class GetCompanyNameResponseWrapper {
     this.data = data;
   }
 
-  public GetCompanyNameResponseWrapper error(JsonNullableObject error) {
-    this.error = error;
+  public GetCompanyNameResponseWrapper error(Object error) {
+    this.error = JsonNullable.of(error);
     return this;
   }
 
@@ -56,14 +58,14 @@ public class GetCompanyNameResponseWrapper {
    * Get error
    * @return error
   */
-  @Valid 
+  
   @Schema(name = "error", requiredMode = Schema.RequiredMode.NOT_REQUIRED)
   @JsonProperty("error")
-  public JsonNullableObject getError() {
+  public JsonNullable<Object> getError() {
     return error;
   }
 
-  public void setError(JsonNullableObject error) {
+  public void setError(JsonNullable<Object> error) {
     this.error = error;
   }
 
@@ -77,12 +79,23 @@ public class GetCompanyNameResponseWrapper {
     }
     GetCompanyNameResponseWrapper getCompanyNameResponseWrapper = (GetCompanyNameResponseWrapper) o;
     return Objects.equals(this.data, getCompanyNameResponseWrapper.data) &&
-        Objects.equals(this.error, getCompanyNameResponseWrapper.error);
+        equalsNullable(this.error, getCompanyNameResponseWrapper.error);
+  }
+
+  private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
+    return a == b || (a != null && b != null && a.isPresent() && b.isPresent() && Objects.deepEquals(a.get(), b.get()));
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(data, error);
+    return Objects.hash(data, hashCodeNullable(error));
+  }
+
+  private static <T> int hashCodeNullable(JsonNullable<T> a) {
+    if (a == null) {
+      return 1;
+    }
+    return a.isPresent() ? Arrays.deepHashCode(new Object[]{a.get()}) : 31;
   }
 
   @Override

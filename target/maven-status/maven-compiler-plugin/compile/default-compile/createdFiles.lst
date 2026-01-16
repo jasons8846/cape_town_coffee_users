@@ -1,9 +1,11 @@
 com\jasons\cptcoffeeusers\model\Company.class
+com\jasons\cptcoffeeusers\model\GetCpyProductResponse.class
 com\jasons\cptcoffeeusers\services\Impl\ProductServiceImpl.class
 com\jasons\cptcoffeeusers\controllers\ProductController.class
 com\jasons\cptcoffeeusers\model\GetCompanyNameResponseWrapper.class
 com\jasons\cptcoffeeusers\api\ProductsApi.class
 com\jasons\cptcoffeeusers\CptcoffeeusersApplication.class
+com\jasons\cptcoffeeusers\model\ProductVariant.class
 com\jasons\cptcoffeeusers\controllers\CompanyController.class
 com\jasons\cptcoffeeusers\repositories\CompanyRepository.class
 com\jasons\cptcoffeeusers\api\ApiUtil.class
@@ -18,7 +20,8 @@ com\jasons\cptcoffeeusers\model\GetCpyProductResponseWrapper.class
 com\jasons\cptcoffeeusers\model\ErrorResponseWrapper.class
 com\jasons\cptcoffeeusers\services\CompanyService.class
 com\jasons\cptcoffeeusers\entities\ProductEntity.class
-com\jasons\cptcoffeeusers\model\JsonNullableObject.class
+com\jasons\cptcoffeeusers\supportfunctions\CursorCrypto.class
 com\jasons\cptcoffeeusers\advice\GlobalExceptionHandler.class
 com\jasons\cptcoffeeusers\services\Impl\CompanyServiceImpl.class
 com\jasons\cptcoffeeusers\model\GetAllCompaniesResponseWrapper.class
+com\jasons\cptcoffeeusers\entities\ProductVariantEntity.class
