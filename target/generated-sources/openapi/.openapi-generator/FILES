@@ -4,6 +4,7 @@ pom.xml
 src/main/java/com/jasons/cptcoffeeusers/api/ApiUtil.java
 src/main/java/com/jasons/cptcoffeeusers/api/CompanyApi.java
 src/main/java/com/jasons/cptcoffeeusers/api/ProductsApi.java
+src/main/java/com/jasons/cptcoffeeusers/api/SystemApi.java
 src/main/java/com/jasons/cptcoffeeusers/model/Company.java
 src/main/java/com/jasons/cptcoffeeusers/model/ErrorResponse.java
 src/main/java/com/jasons/cptcoffeeusers/model/ErrorResponseWrapper.java
@@ -13,3 +14,5 @@ src/main/java/com/jasons/cptcoffeeusers/model/GetCpyProductResponse.java
 src/main/java/com/jasons/cptcoffeeusers/model/GetCpyProductResponseWrapper.java
 src/main/java/com/jasons/cptcoffeeusers/model/Product.java
 src/main/java/com/jasons/cptcoffeeusers/model/ProductVariant.java
+src/main/java/com/jasons/cptcoffeeusers/model/SystemPingResponse.java
+src/main/java/com/jasons/cptcoffeeusers/model/SystemPingResponseWrapper.java
