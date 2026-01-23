@@ -35,10 +35,10 @@ public class SystemController implements SystemApi {
                 .body(wrapper);
     }
 
-    @Scheduled(cron = "*/5 * * * * *")
+    @Scheduled(cron = "0 */5 * ? * *")
     public void callWikiService(){
         restClient.get()
-                .uri("/")
+                .uri("/v1/system/ping")
                 .retrieve()
                 .body(SystemPingResponseWrapper.class);
     }
