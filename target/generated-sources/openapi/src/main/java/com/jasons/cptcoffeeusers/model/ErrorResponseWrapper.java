@@ -22,7 +22,7 @@ import jakarta.annotation.Generated;
  * ErrorResponseWrapper
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-01-23T13:31:51.502417700+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-02-03T09:43:01.351005+02:00[Africa/Johannesburg]", comments = "Generator version: 7.4.0")
 public class ErrorResponseWrapper {
 
   private JsonNullable<Object> data = JsonNullable.<Object>undefined();

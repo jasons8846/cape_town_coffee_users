@@ -21,6 +21,7 @@ com\jasons\cptcoffeeusers\api\CompanyApi.class
 com\jasons\cptcoffeeusers\model\SystemPingResponse.class
 com\jasons\cptcoffeeusers\model\GetCpyProductResponseWrapper.class
 com\jasons\cptcoffeeusers\controllers\SystemController.class
+com\jasons\cptcoffeeusers\model\ProductSize.class
 com\jasons\cptcoffeeusers\model\ErrorResponseWrapper.class
 com\jasons\cptcoffeeusers\services\CompanyService.class
 com\jasons\cptcoffeeusers\entities\ProductEntity.class

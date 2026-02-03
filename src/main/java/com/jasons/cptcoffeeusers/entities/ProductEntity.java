@@ -1,5 +1,6 @@
 package com.jasons.cptcoffeeusers.entities;
 
+import com.jasons.cptcoffeeusers.model.ProductSize;
 import com.jasons.cptcoffeeusers.model.ProductVariant;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -17,23 +18,28 @@ public class ProductEntity {
     private String companyCode;
     private String name;
 
-    public ProductVariant getProductVariant() {
-        return productVariant;
-    }
-
-    public void setProductVariant(ProductVariant productVariant) {
-        this.productVariant = productVariant;
-    }
-
 
     @Column(name="variant")
     @JdbcTypeCode(SqlTypes.JSON)
     private ProductVariant productVariant;
+    @Column(name="size")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private ProductSize productSize;
     private BigDecimal price;
     private String currency;
+
+    public ProductSize getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(ProductSize productSize) {
+        this.productSize = productSize;
+    }
+
     private Boolean active;
 
     private Integer sequence;
+
 
     public Integer getSequence() {
         return sequence;
@@ -49,6 +55,14 @@ public class ProductEntity {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public ProductVariant getProductVariant() {
+        return productVariant;
+    }
+
+    public void setProductVariant(ProductVariant productVariant) {
+        this.productVariant = productVariant;
     }
 
     public ProductEntity() {
